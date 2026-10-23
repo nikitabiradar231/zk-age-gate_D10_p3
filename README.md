@@ -1,6 +1,6 @@
 # zk-age-gate: Old Enough — and That's All You Get to Know
 
-[![CI](https://github.com/slowbloom/zk-age-gate/actions/workflows/ci.yml/badge.svg)](https://github.com/slowbloom/zk-age-gate/actions/workflows/ci.yml)
+[![CI](https://github.com/nikitabiradar231/zk-age-gate_D10_p3/actions/workflows/ci.yml/badge.svg)](https://github.com/nikitabiradar231/zk-age-gate_D10_p3/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Noir Version](https://img.shields.io/badge/Noir-v1.0.0--beta.3-blue)](https://noir-lang.org/)
 [![Barretenberg](https://img.shields.io/badge/Barretenberg-v0.82.2-purple)](https://github.com/AztecProtocol/aztec-packages)
@@ -105,8 +105,8 @@ The circuit strictly implements Gregorian calendar rules without approximation:
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/slowbloom/zk-age-gate.git
-cd zk-age-gate
+git clone https://github.com/nikitabiradar231/zk-age-gate_D10_p3.git
+cd zk-age-gate_D10_p3
 
 # 2. Install Node dependencies
 npm install
@@ -203,7 +203,7 @@ All 10 official criteria from the Road to Devcon X specification are fully satis
 | 7 | Birth date is not a public input | **PASS** | Only 9 public inputs exist; birth date is purely private witness |
 | 8 | Access granted only after verifier success | **PASS** | `AgeGate.sol` checks `verifier.verify() == true`; failing verifier grants no access |
 | 9 | Test asserts underage witness fails | **PASS** | Circuit test `test_underage_candidate_fails` and TS test assert constraint violation |
-| 10 | No secret appears in tracked files | **PASS** | `npm run check:no-secrets` scans 105 tracked files with 0 violations |
+| 10 | No secret appears in tracked files | **PASS** | `npm run check:no-secrets` scans 112 tracked files with 0 violations |
 
 See [ACCEPTANCE_CRITERIA.md](docs/ACCEPTANCE_CRITERIA.md) for full mapping.
 

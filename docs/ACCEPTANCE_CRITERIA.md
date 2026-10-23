@@ -17,7 +17,7 @@ This document maps all **10 official challenge criteria** for the `zk-gated-age-
 | **7** | **Birth date is not a public input** | **PASS** | [`main.nr`](file:///circuits/age_gate/src/main.nr#L129-L153)<br>• `birth_year`, `birth_month`, `birth_day` are private witness inputs<br>• Only 9 fields exposed as `pub` | [`age_gate.test.ts`](file:///circuits-test/age_gate.test.ts#L133-L177)<br>• `zero disclosure: birth date, credential ID, and secrets remain private`<br>[`ts-runner.ts`](file:///test/ts-runner.ts#L143-L157)<br>• `no secret or birth date leakage during input preparation` |
 | **8** | **Access is granted only after verifier success** | **PASS** | [`AgeGate.sol`](file:///contracts/AgeGate.sol#L125-L147)<br>• Calls `verifier.verify(proof, publicInputs)`<br>• Requires `bool success == true`<br>• Access and pass counting update only upon success | [`AgeGate.t.sol`](file:///test/AgeGate.t.sol#L96-L128)<br>• `test_ValidAdultCanClaim`<br>• `test_MockFailingVerifierNeverGrantsAccess`<br>• `test_MockRevertingVerifierNeverGrantsAccess`<br>• `test_NoAlternateAccessPath` |
 | **9** | **A test asserts that an underage witness fails** | **PASS** | [`main.nr`](file:///circuits/age_gate/src/main.nr#L278-L283)<br>• Circuit unit test `test_underage_candidate_fails` asserts constraint violation | Executed during `nargo test` & `npm run test:circuits`<br>Output: `Testing test_underage_candidate_fails ... ok` |
-| **10** | **No secret appears in tracked files** | **PASS** | [`.gitignore`](file:///.gitignore)<br>• Ignores `.env`, `*witness*`, `Prover.toml`<br>[`check-no-secrets.ts`](file:///scripts/check-no-secrets.ts#L12-L123)<br>• Automated regex scanner across all tracked repository files | Executed via `npm run check:no-secrets`<br>Output: `Scanned 105 tracked files. No secrets found!` |
+| **10** | **No secret appears in tracked files** | **PASS** | [`.gitignore`](file:///.gitignore)<br>• Ignores `.env`, `*witness*`, `Prover.toml`<br>[`check-no-secrets.ts`](file:///scripts/check-no-secrets.ts#L12-L123)<br>• Automated regex scanner across all tracked repository files | Executed via `npm run check:no-secrets`<br>Output: `Scanned 112 tracked files. No secrets found!` |
 
 ---
 
@@ -45,5 +45,5 @@ Total Foundry tests: 20 passed, 0 failed
 > ts-node scripts/check-no-secrets.ts
 
 === zk-age-gate: Secret Scanner ===
-✓ Scanned 105 tracked files. No secrets found!
+✓ Scanned 112 tracked files. No secrets found!
 ```
