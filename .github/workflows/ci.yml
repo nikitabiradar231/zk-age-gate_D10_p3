@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Build, Test & Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Install Nargo (Noir)
+        run: |
+          curl -L https://raw.githubusercontent.com/noir-lang/noirup/main/install | bash
+          export PATH="$HOME/.nargo/bin:$PATH"
+          $HOME/.nargo/bin/noirup -v 1.0.0-beta.3
+          echo "$HOME/.nargo/bin" >> $GITHUB_PATH
+
+      - name: Install Barretenberg (bb)
+        run: |
+          curl -L https://raw.githubusercontent.com/AztecProtocol/aztec-packages/master/barretenberg/bbup/install | bash
+          export PATH="$HOME/.bb:$PATH"
+          $HOME/.bb/bbup -v 0.82.2
+          echo "$HOME/.bb" >> $GITHUB_PATH
+
+      - name: Check for committed secrets
+        run: npm run check:no-secrets
+
+      - name: Check generated artifacts consistency
+        run: npm run check:artifacts
+
+      - name: Run TypeScript type check
+        run: npm run typecheck
+
+      - name: Run Noir circuit tests
+        run: |
+          cd circuits/age_gate
+          nargo test
+
+      - name: Run TypeScript client & prover integration tests
+        run: npm run test:ts
+
+      - name: Run Foundry smart contract tests
+        run: forge test -vv

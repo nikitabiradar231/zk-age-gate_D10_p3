@@ -1,0 +1,41 @@
+{
+  "name": "zk-age-gate",
+  "version": "1.0.0",
+  "description": "Zero-knowledge age-gated festival pass verification for Slow Bloom (Road to Devcon X - P3)",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npm run build:circuit && tsc",
+    "build:circuit": "ts-node scripts/build-circuit.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run test:circuits && npm run test:ts && npm run test:contracts",
+    "test:circuits": "ts-node test/circuits-runner.ts",
+    "test:ts": "ts-node test/ts-runner.ts",
+    "test:contracts": "ts-node scripts/test-contracts.ts",
+    "prove": "ts-node scripts/generate-proof.ts",
+    "verify": "ts-node scripts/verify-proof.ts",
+    "check:no-secrets": "ts-node scripts/check-no-secrets.ts",
+    "check:artifacts": "ts-node scripts/check-generated-artifacts.ts"
+  },
+  "keywords": [
+    "zero-knowledge",
+    "noir",
+    "barretenberg",
+    "solidity",
+    "foundry",
+    "age-gate",
+    "slow-bloom",
+    "zk-proof"
+  ],
+  "author": "Slow Bloom Security Engineering",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "@noble/curves": "^1.8.0",
+    "@noble/hashes": "^1.7.0",
+    "ethers": "^6.13.5"
+  }
+}

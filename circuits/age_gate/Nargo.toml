@@ -1,0 +1,6 @@
+[package]
+name = "age_gate"
+type = "bin"
+authors = ["Slow Bloom Security Team"]
+
+[dependencies]

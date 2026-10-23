@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Build artifacts
+dist/
+target/
+circuits/age_gate/target/
+out/
+cache/
+
+# Foundry artifacts
+broadcast/
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.secret
+
+# Private inputs and witnesses
+circuits/**/Prover.toml
+!circuits/**/Prover.toml.example
+*.witness
+*witness*
+
+# OS and logs
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage and testing
+coverage/
+.nyc_output/
